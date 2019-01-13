@@ -30,7 +30,8 @@ namespace ConsoleApp
             var network = new ActivationNetwork(new SigmoidFunction(1), inputCount, inputCount / 2, inputCount / 2, inputCount / 2, inputCount);
             var annService = new AnnService(
                 network,
-                new TerminationCondition { MinError = 0.01, NumberOfEpochs = 1 });
+                new TerminationCondition { MinError = 0.01, NumberOfEpochs = 1 },
+                0.01);
 
             annService.Train(input, output);
 

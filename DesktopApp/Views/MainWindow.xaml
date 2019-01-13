@@ -1,0 +1,28 @@
+﻿<Window x:Class="DesktopApp.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DesktopApp.Views"
+        xmlns:viewModels="clr-namespace:DesktopApp.ViewModels"
+        mc:Ignorable="d"
+        Title="Heart chamber identification" Height="800" Width="900">
+
+    <Window.Resources>
+        <viewModels:MainWindowViewModel x:Key="MainWindowViewModel"/>
+    </Window.Resources>
+
+    <Grid DataContext="{StaticResource MainWindowViewModel}">
+        <DockPanel Margin="0,0">
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Learning algorithm">
+                    <MenuItem Header="ANN" Command="{Binding NavigateToAnnPage}"/>
+                    <MenuItem Header="SVM" Command="{Binding NavigateToSvmPage}"/>
+                    <Separator />
+                    <MenuItem Header="Exit" />
+                </MenuItem>
+            </Menu>
+            <Frame x:Name="MainFrame" Content="{Binding Page}"/>
+        </DockPanel>
+    </Grid>
+</Window>

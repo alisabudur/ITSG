@@ -18,12 +18,17 @@ namespace HeartChamberIdentification.Services
         /// <param name="network">Represents the Artificial Neural Network.</param>
         /// <param name="terminationCondition">Represents the termination condition of 
         /// Artificial Neural Network.</param>
+        /// <param name="learningRate">Represents the learning rate of Artificial Neural Network.</param>
         public AnnService(
             ActivationNetwork network,
-            TerminationCondition terminationCondition)
+            TerminationCondition terminationCondition,
+            double learningRate)
         {
             Network = network;
-            _learning = new BackPropagationLearning(network);
+            _learning = new BackPropagationLearning(network)
+            {
+                LearningRate = learningRate
+            };
             _terminationCondition = terminationCondition;
         }
 

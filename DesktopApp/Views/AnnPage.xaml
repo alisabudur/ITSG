@@ -1,0 +1,292 @@
+﻿<Page x:Class="DesktopApp.Views.AnnPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:DesktopApp.Views"
+      xmlns:viewModels="clr-namespace:DesktopApp.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="800" d:DesignWidth="900"
+      Title="Ann Page">
+
+    <Page.Resources>
+        <viewModels:AnnPageViewModel x:Key="AnnPageViewModel"/>
+    </Page.Resources>
+
+    <Grid DataContext="{StaticResource AnnPageViewModel}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="6*"/>
+            <RowDefinition Height="30*"/>
+            <RowDefinition Height="45*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Artificial Neural Network" 
+               HorizontalAlignment="Left" 
+               Margin="20,10,0,0" 
+               VerticalAlignment="Top" 
+               Height="30" 
+               Width="auto"
+               Grid.Row="0"
+               FontSize="14"
+               FontWeight="Bold"/>
+
+        <GroupBox Header="Training"
+                  Margin="20, 5"
+                  Grid.Row="1">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="2*"/>
+                </Grid.RowDefinitions>
+
+                <GroupBox Header="Data"
+                          Margin="20, 5"
+                          Grid.Row="0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="4*"/>
+                            <RowDefinition Height="4*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid Grid.Row="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="8*"/>
+                                <ColumnDefinition Width="26*"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Training folder:" 
+                                   HorizontalAlignment="Left" 
+                                   Margin="10,10,0,0" 
+                                   VerticalAlignment="Top" 
+                                   Height="26" 
+                                   Width="100"
+                                   Grid.Row="0" />
+
+                            <TextBox HorizontalAlignment="Left" 
+                                     Height="23" Margin="10,13,0,0" 
+                                     TextWrapping="Wrap" 
+                                     Text="{Binding AnnModel.TrainingFolder, Mode=OneWay}" 
+                                     VerticalAlignment="Top" 
+                                     Width="360"
+                                     IsEnabled="False"
+                                     Grid.Column="1"/>
+
+                            <Button Content="Select training folder" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,13,0,0" 
+                                    VerticalAlignment="Top"
+                                    Command="{Binding SelectTrainingFolderCommand}"
+                                    Grid.Column="2"/>
+                        </Grid>
+
+                        <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="8*"/>
+                                <ColumnDefinition Width="26*"/>
+                                <ColumnDefinition Width="20*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Label Content="Testing folder:" 
+                                   HorizontalAlignment="Left" 
+                                   Margin="10,10,0,0" 
+                                   VerticalAlignment="Top" 
+                                   Height="26" 
+                                   Width="100"
+                                   Grid.Row="0" />
+
+                            <TextBox HorizontalAlignment="Left" 
+                                     Height="23" Margin="10,13,0,0" 
+                                     TextWrapping="Wrap" 
+                                     Text="{Binding AnnModel.TestingFolder, Mode=OneWay}" 
+                                     VerticalAlignment="Top" 
+                                     Width="360"
+                                     IsEnabled="False"
+                                     Grid.Column="1"/>
+
+                            <Button Content="Select testing folder" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,13,0,0" 
+                                    VerticalAlignment="Top"
+                                    Command="{Binding SelectTestingFolderCommand}"
+                                    Grid.Column="2"/>
+                        </Grid>
+
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="ANN Parameters"
+                          Margin="20, 5"
+                          Grid.Row="1">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="15*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Label Content="Minimum error:" 
+                       HorizontalAlignment="Left" 
+                       Margin="10,10,0,0" 
+                       VerticalAlignment="Top" 
+                       Height="26" 
+                       Width="95"
+                       Grid.Column="0"/>
+
+                        <TextBox HorizontalAlignment="Left" 
+                         Height="23" Margin="0,13,0,0" 
+                         TextWrapping="Wrap" 
+                         Text="{Binding AnnModel.MinError, Mode=TwoWay, ValidatesOnDataErrors=True}" 
+                         VerticalAlignment="Top" 
+                         Width="50"
+                         Grid.Column="1"/>
+
+                        <Label Content="Learning rate:" 
+                       HorizontalAlignment="Left" 
+                       Margin="10,10,0,0" 
+                       VerticalAlignment="Top" 
+                       Height="26" 
+                       Width="95"
+                       Grid.Column="2"/>
+
+                        <TextBox HorizontalAlignment="Left" 
+                         Height="23" Margin="0,13,0,0" 
+                         TextWrapping="Wrap" 
+                         Text="{Binding AnnModel.LearningRate, Mode=TwoWay, ValidatesOnDataErrors=True}" 
+                         VerticalAlignment="Top" 
+                         Width="50"
+                         Grid.Column="3"/>
+
+                        <Label Content="No. of epochs:" 
+                       HorizontalAlignment="Left" 
+                       Margin="10,10,0,0" 
+                       VerticalAlignment="Top" 
+                       Height="26" 
+                       Width="95"
+                       Grid.Column="4"/>
+
+                        <TextBox HorizontalAlignment="Left" 
+                         Height="23" Margin="0,13,0,0" 
+                         TextWrapping="Wrap" 
+                         Text="{Binding AnnModel.NoOfEpochs, Mode=TwoWay, ValidatesOnDataErrors=True}" 
+                         VerticalAlignment="Top" 
+                         Width="50"
+                         Grid.Column="5"/>
+                    </Grid>
+                </GroupBox>
+
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="ANN successfully trained!" 
+                           HorizontalAlignment="Right" 
+                           Margin="10,10,0,0" 
+                           VerticalAlignment="Top" 
+                           Height="26" 
+                           Width="200"
+                           FontWeight="Bold"
+                           FontSize="13"
+                           Foreground="Green"
+                           Visibility="{Binding AnnModel.IsTraitenLabelVisibility}"
+                           Grid.Column="0" />
+
+                    <Button Content="Start training" 
+                            HorizontalAlignment="Right" 
+                            Margin="0,13,20,0" 
+                            VerticalAlignment="Top"
+                            Command="{Binding StartTrainingCommand}"
+                            IsEnabled="{Binding AnnModel.StartTrainingEnabled}"
+                            Grid.Column="1"/>
+                </Grid>
+                
+            </Grid>
+        </GroupBox>
+
+        <GroupBox Header="Testing"
+                  Margin="20, 5"
+                  Grid.Row="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="10*"/>
+                    <RowDefinition Height="80*"/>
+                    <RowDefinition Height="10*"/>
+                </Grid.RowDefinitions>
+
+                <Grid Grid.Row="0"
+                      Margin="10, 0, 0, 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="26*"/>
+                        <ColumnDefinition Width="20*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Testing image:" 
+                           HorizontalAlignment="Left" 
+                           Margin="10,10,0,0" 
+                           VerticalAlignment="Top" 
+                           Height="26" 
+                           Width="100"
+                           Grid.Row="0" />
+
+                    <TextBox HorizontalAlignment="Left" 
+                             Height="23" Margin="10,13,0,0" 
+                             TextWrapping="Wrap" 
+                             Text="{Binding AnnModel.TestImagePath, Mode=OneWay}" 
+                             VerticalAlignment="Top" 
+                             Width="360"
+                             IsEnabled="False"
+                             Grid.Column="1"/>
+
+                    <Button Content="Select testing image" 
+                            HorizontalAlignment="Left" 
+                            Margin="10,13,0,0" 
+                            VerticalAlignment="Top"
+                            Command="{Binding UploadTestImageCommand}"
+                            Grid.Column="2"/>
+                </Grid>
+                
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <GroupBox Header="Source Image"
+                              Margin="20, 5"
+                              Grid.Column="0">
+                        <Image Height="Auto" 
+                               Width="Auto" 
+                               Margin="10"
+                               Source="{Binding AnnModel.TestImagePath}"/>
+                    </GroupBox>
+
+                    <GroupBox Header="Result Image"
+                              Margin="20, 5"
+                              Grid.Column="1">
+                        <Image Height="Auto" 
+                               Width="Auto" 
+                               Margin="10"
+                               Source="{Binding AnnModel.ResultImagePath}"
+                               Visibility="{Binding AnnModel.ResultImageVisibility}"/>
+                    </GroupBox>
+                </Grid>
+
+                <Button Content="Start testing" 
+                        HorizontalAlignment="Right" 
+                        Margin="0,13,20,0" 
+                        VerticalAlignment="Top"
+                        Command="{Binding StartTestingCommand}"
+                        IsEnabled="{Binding AnnModel.StartTestingEnabled}"
+                        Grid.Row="2"/>
+            </Grid>
+            
+        </GroupBox>
+    </Grid>
+</Page>
