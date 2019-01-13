@@ -1,88 +1,62 @@
-﻿using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using Accord.Neuro;
-using HeartChamberIdentification.DAL;
-using HeartChamberIdentification.Extensions;
-using MyMachineLearning.Extensions;
-using MyMachineLearning.Interfaces;
+﻿using Accord.Neuro;
+using Accord.Neuro.Learning;
 using MyMachineLearning.Models;
-using MyMachineLearning.Services;
 
 namespace HeartChamberIdentification.Services
 {
-    public class AnnService : AnnServiceBase<Pixel>
+    public class AnnService
     {
+        private readonly ActivationNetwork Network;
+
+        private readonly BackPropagationLearning _learning;
+        private readonly TerminationCondition _terminationCondition;
+        private readonly ImageService _imageService;
+
+        /// <summary>
+        /// Constructor for AnnServiceBase
+        /// </summary>
+        /// <param name="network">Represents the Artificial Neural Network.</param>
+        /// <param name="terminationCondition">Represents the termination condition of 
+        /// Artificial Neural Network.</param>
         public AnnService(
             ActivationNetwork network,
             TerminationCondition terminationCondition)
-        : base(network, terminationCondition)
         {
+            Network = network;
+            _learning = new BackPropagationLearning(network);
+            _terminationCondition = terminationCondition;
         }
 
         /// <summary>
-        /// Gets the performance of Artificial Neural Network previously trained.
+        /// Trains a Neural Neywork with Back-propagation learning.
         /// </summary>
-        /// <param name="testData">Represents the testing data set.</param>
-        /// <returns>Returns the performance result.</returns>
-        public override IPerformance GetNetworkPerformane(IEnumerable<Pixel> testData)
+        /// <param name="input">The input of the ANN.</param>
+        /// <param name="output">The output of the ANN.</param>
+        public void Train(double[][] input, double[][] output)
         {
-            var ioModel = testData.GetInputOutputModel();
-            var input = ioModel.Input;
+            var needToStop = false;
+            var epoch = 0;
 
-            var actualOutput = new List<int>();
-            var expectedOutput = ioModel.Output.Select(x => (int)x[0]).ToArray();
-
-            foreach (var inputItem in input)
+            while (!needToStop && epoch < _terminationCondition.NumberOfEpochs)
             {
-                var outputItem = Network.Compute(inputItem);
-                actualOutput.Add(outputItem[0] >= 0.99 ? 1 : 0);
+                var error = _learning.RunEpoch(input, output)
+                            / input.Length/input[0].Length;
+
+                if (error < _terminationCondition.MinError)
+                    needToStop = true;
+
+                epoch++;
             }
-
-            return new BinaryClassificationPerformanceModel
-            {
-                Precision = PerformanceService.ComputePrecision(actualOutput.ToArray(), expectedOutput),
-                Recall = PerformanceService.ComputeRecall(actualOutput.ToArray(), expectedOutput),
-                Accuracy = PerformanceService.ComputeAccuracy(actualOutput.ToArray(), expectedOutput)
-            };
         }
 
         /// <summary>
-        /// Gets the image contour.
+        /// Computes the result of the Artificial Neural network previously trained.
         /// </summary>
-        /// <param name="image">Represents the image for which we wnat to get the contour.</param>
-        /// <returns>Returns the initial image with the contour.</returns>
-        public Bitmap GetImageContour(Bitmap image, IEnumerable<Pixel> testData)
+        /// <param name="input">The input of the ANN.</param>
+        /// <returns>Returns the output of ANN.</returns>
+        public double[] Compute(double[] input)
         {
-            var resultImage = image.DeepClone();
-            var testDataArray = testData.ToArray();
-            var i = 0;
-
-            for (var x = 0; x < image.Width; x++)
-            {
-                for (int y = 0; y < image.Height; y++)
-                {
-                    var item = testDataArray[i];
-                    var pixelColor = image.GetPixel(x, y);
-                    var input = new double[]
-                    {
-                        item.Red,
-                        pixelColor.GetBrightness()
-                    };
-
-                    var output = Network.Compute(input);
-                    var isContour = output[0] >= 0.99;
-
-                    if (isContour)
-                    {
-                        resultImage.SetPixel(x, y, Color.Red);
-                    }
-
-                    i++;
-                }
-            }
-
-            return resultImage;
+            return Network.Compute(input);
         }
     }
 }
