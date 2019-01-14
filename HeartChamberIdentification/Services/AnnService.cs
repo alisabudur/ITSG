@@ -1,6 +1,6 @@
 ﻿using Accord.Neuro;
 using Accord.Neuro.Learning;
-using MyMachineLearning.Models;
+using HeartChamberIdentification.Utils;
 
 namespace HeartChamberIdentification.Services
 {

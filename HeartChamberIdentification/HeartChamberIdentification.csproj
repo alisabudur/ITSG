@@ -75,6 +75,7 @@
     <Compile Include="Services\AnnService.cs" />
     <Compile Include="Services\ImageService.cs" />
     <Compile Include="Services\PerformanceService.cs" />
+    <Compile Include="Utils\TerminationCondition.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.Config" />
@@ -84,12 +85,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\MyMachineLearning\MyMachineLearning.csproj">
-      <Project>{2d62533b-a722-4cf1-b242-ed501ce4367d}</Project>
-      <Name>MyMachineLearning</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Accord.3.8.0\build\Accord.targets" Condition="Exists('..\packages\Accord.3.8.0\build\Accord.targets')" />

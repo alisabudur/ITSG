@@ -4,7 +4,7 @@ using System.Drawing;
 using System.IO;
 using Accord.Neuro;
 using HeartChamberIdentification.Services;
-using MyMachineLearning.Models;
+using HeartChamberIdentification.Utils;
 
 namespace ConsoleApp
 {

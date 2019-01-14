@@ -3,10 +3,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Accord.Neuro;
-using Accord.Neuro.ActivationFunctions;
 using DesktopApp.Models;
 using HeartChamberIdentification.Services;
-using MyMachineLearning.Models;
+using HeartChamberIdentification.Utils;
 
 namespace DesktopApp.ViewModels
 {
