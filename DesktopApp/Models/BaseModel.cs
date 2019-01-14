@@ -72,7 +72,8 @@ namespace DesktopApp.Models
             {
                 _isTrained = value;
                 OnPropertyChanged(nameof(IsTrained));
-                OnPropertyChanged(nameof(IsTraitenLabelVisibility));
+                OnPropertyChanged(nameof(TrainedLabelVisibility));
+                OnPropertyChanged(nameof(StartTestingEnabled));
             }
         }
 
@@ -87,7 +88,7 @@ namespace DesktopApp.Models
             }
         }
 
-        public Visibility IsTraitenLabelVisibility => IsTrained ? Visibility.Visible : Visibility.Hidden;
+        public Visibility TrainedLabelVisibility => IsTrained ? Visibility.Visible : Visibility.Hidden;
 
         public virtual bool StartTestingEnabled => IsTrained && !string.IsNullOrEmpty(TestImagePath);
 

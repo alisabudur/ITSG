@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows;
 using System.Windows.Input;
 using Accord.Neuro;
+using Accord.Neuro.ActivationFunctions;
 using DesktopApp.Models;
 using HeartChamberIdentification.Services;
 using MyMachineLearning.Models;
@@ -44,10 +45,10 @@ namespace DesktopApp.ViewModels
 
             var inputCount = input[0].Length;
             var network = new ActivationNetwork(
-                new SigmoidFunction(1), 
-                inputCount, inputCount / 2, 
-                inputCount / 2, 
-                inputCount / 2, 
+                new SigmoidFunction(), 
+                inputCount,
+                10,
+                10,
                 inputCount);
 
             _annService = new AnnService(

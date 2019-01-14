@@ -109,7 +109,7 @@ namespace HeartChamberIdentification.Services
             {
                 for (var y = 0; y < height; y++)
                 {
-                    var grey = (int)pixels[i];
+                    var grey = pixels[i] >= 0.65 ? 255 : 0;
                     image.SetPixel(x, y, Color.FromArgb(grey, grey, grey));
                     i++;
                 }

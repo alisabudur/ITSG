@@ -194,7 +194,7 @@
                            FontWeight="Bold"
                            FontSize="13"
                            Foreground="Green"
-                           Visibility="{Binding AnnModel.IsTraitenLabelVisibility}"
+                           Visibility="{Binding AnnModel.TrainedLabelVisibility}"
                            Grid.Column="0" />
 
                     <Button Content="Start training" 
