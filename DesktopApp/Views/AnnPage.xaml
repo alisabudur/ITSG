@@ -54,6 +54,7 @@
                                 <ColumnDefinition Width="8*"/>
                                 <ColumnDefinition Width="26*"/>
                                 <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="10*"/>
                             </Grid.ColumnDefinitions>
 
                             <Label Content="Training folder:" 
@@ -86,6 +87,7 @@
                                 <ColumnDefinition Width="8*"/>
                                 <ColumnDefinition Width="26*"/>
                                 <ColumnDefinition Width="20*"/>
+                                <ColumnDefinition Width="10*"/>
                             </Grid.ColumnDefinitions>
 
                             <Label Content="Testing folder:" 
@@ -111,10 +113,18 @@
                                     VerticalAlignment="Top"
                                     Command="{Binding SelectTestingFolderCommand}"
                                     Grid.Column="2"/>
+
+                            <Button Content="Run Test Folder" 
+                                    HorizontalAlignment="Left" 
+                                    Margin="10,13,0,0" 
+                                    VerticalAlignment="Top"
+                                    Command="{Binding DoTestingFolderCommand}"
+                                    Grid.Column="3"/>
                         </Grid>
 
                     </Grid>
                 </GroupBox>
+
 
                 <GroupBox Header="ANN Parameters"
                           Margin="20, 5"
