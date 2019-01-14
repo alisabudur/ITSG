@@ -12,6 +12,7 @@ namespace DesktopApp.ViewModels
     {
         private ICommand _startTraining;
         private ICommand _startTesting;
+        private ICommand _refresh;
         private SvmService _svmService;
         private ImageService _imageService;
 
@@ -25,6 +26,9 @@ namespace DesktopApp.ViewModels
 
         public ICommand StartTestingCommand =>
             _startTesting ?? (_startTesting = new CommandHandler(StartTesting, _canExecute));
+
+        public ICommand RefreshCommand =>
+            _refresh ?? (_refresh = new CommandHandler(Refresh, _canExecute));
 
         public SvmModel SvmModel
         {
@@ -58,6 +62,12 @@ namespace DesktopApp.ViewModels
 
             resultImage.Save(SvmModel.ResultImagePath);
             SvmModel.ResultImageVisibility = Visibility.Visible;
+        }
+
+        public void Refresh()
+        {
+            _svmService = null;
+            SvmModel = new SvmModel();
         }
     }
 }

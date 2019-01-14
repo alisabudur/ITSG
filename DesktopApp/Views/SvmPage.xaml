@@ -30,6 +30,13 @@
                FontSize="14"
                FontWeight="Bold"/>
 
+        <Button Content="Refresh" 
+                HorizontalAlignment="Right" 
+                Margin="10,13,20,0" 
+                VerticalAlignment="Top"
+                Command="{Binding RefreshCommand}"
+                Grid.Row="0"/>
+
         <GroupBox Header="Training"
                   Margin="20, 5"
                   Grid.Row="1">

@@ -107,7 +107,7 @@ namespace HeartChamberIdentification.Services
             {
                 for (var y = 0; y < image.Height; y++)
                 {
-                    if(pixels[i] >= 0.5)
+                    if(pixels[i] >= 0.55)
                         image.SetPixel(x, y, Color.DarkOrange);
                     i++;
                 }

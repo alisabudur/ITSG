@@ -14,6 +14,7 @@ namespace DesktopApp.ViewModels
     {
         private ICommand _startTraining;
         private ICommand _startTesting;
+        private ICommand _refresh;
         private AnnService _annService;
         private ImageService _imageService;
 
@@ -27,6 +28,9 @@ namespace DesktopApp.ViewModels
 
         public ICommand StartTestingCommand =>
             _startTesting ?? (_startTesting = new CommandHandler(StartTesting, _canExecute));
+
+        public ICommand RefreshCommand =>
+            _refresh ?? (_refresh = new CommandHandler(Refresh, _canExecute));
 
         public AnnModel AnnModel
         {
@@ -45,9 +49,8 @@ namespace DesktopApp.ViewModels
 
             var inputCount = input[0].Length;
             var network = new ActivationNetwork(
-                new SigmoidFunction(), 
+                new BipolarSigmoidFunction(1), 
                 inputCount,
-                10,
                 10,
                 inputCount);
 
@@ -72,6 +75,12 @@ namespace DesktopApp.ViewModels
 
             resultImage.Save(AnnModel.ResultImagePath);
             AnnModel.ResultImageVisibility = Visibility.Visible;
+        }
+
+        public void Refresh()
+        {
+            _annService = null;
+            AnnModel = new AnnModel();
         }
     }
 }
