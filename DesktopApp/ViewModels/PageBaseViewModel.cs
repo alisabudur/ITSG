@@ -1,4 +1,6 @@
-﻿using System.Windows.Forms;
+﻿using System.IO;
+using System.Linq;
+using System.Windows.Forms;
 using System.Windows.Input;
 using DesktopApp.Models;
 using DesktopApp.Utils;
@@ -22,13 +24,13 @@ namespace DesktopApp.ViewModels
             _model = model;
         }
 
-        public ICommand SelectTrainingFolderCommand => 
+        public ICommand SelectTrainingFolderCommand =>
             _selectTrainingFolder ?? (_selectTrainingFolder = new CommandHandler(SelectTrainingFolder, _canExecute));
 
-        public ICommand SelectTestingFolderCommand => 
+        public ICommand SelectTestingFolderCommand =>
             _selectTestingFolder ?? (_selectTestingFolder = new CommandHandler(SelectTestingFolder, _canExecute));
 
-        public ICommand UploadTestImageCommand => 
+        public ICommand UploadTestImageCommand =>
             _uploadTestImage ?? (_uploadTestImage = new CommandHandler(UploadImage, _canExecute));
 
         protected BaseModel Model

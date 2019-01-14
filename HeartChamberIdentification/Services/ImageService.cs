@@ -127,7 +127,7 @@ namespace HeartChamberIdentification.Services
             return filesFound.ToArray();
         }
 
-        private bool IsPartOfContour(Color pixel)
+        public bool IsPartOfContour(Color pixel)
         {
             return pixel.R == 241 && pixel.G == 214 && pixel.B == 145;
         }
