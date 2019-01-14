@@ -124,12 +124,32 @@
                     </Grid>
                 </GroupBox>
 
-                <Button Content="Start training" 
-                        HorizontalAlignment="Right" 
-                        Margin="0,13,20,0" 
-                        VerticalAlignment="Top"
-                        Command="{Binding StartTrainingCommand}"
-                        Grid.Row="2"/>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="40*"/>
+                        <ColumnDefinition Width="10*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="SVM successfully trained!" 
+                           HorizontalAlignment="Right" 
+                           Margin="10,10,0,0" 
+                           VerticalAlignment="Top" 
+                           Height="26" 
+                           Width="200"
+                           FontWeight="Bold"
+                           FontSize="13"
+                           Foreground="Green"
+                           Visibility="{Binding SvmModel.TrainedLabelVisibility}"
+                           Grid.Column="0" />
+
+                    <Button Content="Start training" 
+                            HorizontalAlignment="Right" 
+                            Margin="0,13,20,0" 
+                            VerticalAlignment="Top"
+                            Command="{Binding StartTrainingCommand}"
+                            IsEnabled="{Binding SvmModel.StartTrainingEnabled}"
+                            Grid.Column="1"/>
+                </Grid>
             </Grid>
         </GroupBox>
 
@@ -184,13 +204,20 @@
                     <GroupBox Header="Source Image"
                               Margin="20, 5"
                               Grid.Column="0">
-                        <Image Name="Image" Height="Auto" Width="Auto" Source="{Binding SvmModel.TestImagePath}"/>
+                        <Image Name="Image" 
+                               Height="Auto" 
+                               Width="Auto" 
+                               Source="{Binding SvmModel.TestImagePath}"/>
                     </GroupBox>
 
                     <GroupBox Header="Result Image"
                               Margin="20, 5"
                               Grid.Column="1">
-
+                        <Image Height="Auto" 
+                               Width="Auto" 
+                               Margin="10"
+                               Source="{Binding SvmModel.ResultImagePath}"
+                               Visibility="{Binding SvmModel.ResultImageVisibility}"/>
                     </GroupBox>
                 </Grid>
 

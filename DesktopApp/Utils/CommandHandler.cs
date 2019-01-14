@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace DesktopApp.ViewModels
+namespace DesktopApp.Utils
 {
     public class CommandHandler : ICommand
     {

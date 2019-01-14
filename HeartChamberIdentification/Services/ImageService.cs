@@ -94,23 +94,21 @@ namespace HeartChamberIdentification.Services
         }
 
         /// <summary>
-        /// Gets a new image built using given parameters.
+        /// Adds contour to the image.
         /// </summary>
+        /// <param name="image">The image on that we want to add contour.</param>
         /// <param name="pixels">The pixels of the new image.</param>
-        /// <param name="width">The width of the new image.</param>
-        /// <param name="height">The height of the new image.</param>
         /// <returns>Returns an inage of type Bitmap.</returns>
-        public Bitmap GetImageFromPixels(double[] pixels, int width, int height)
+        public Bitmap AddContourToImage(Bitmap image, double[] pixels)
         {
-            var image = new Bitmap(width, height);
             var i = 0;
 
-            for (var x = 0; x < width; x++)
+            for (var x = 0; x < image.Width; x++)
             {
-                for (var y = 0; y < height; y++)
+                for (var y = 0; y < image.Height; y++)
                 {
-                    var grey = pixels[i] >= 0.65 ? 255 : 0;
-                    image.SetPixel(x, y, Color.FromArgb(grey, grey, grey));
+                    if(pixels[i] >= 0.5)
+                        image.SetPixel(x, y, Color.DarkOrange);
                     i++;
                 }
             }

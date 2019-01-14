@@ -86,7 +86,7 @@
     <Compile Include="Models\SvmModel.cs" />
     <Compile Include="ViewModels\AnnPageViewModel.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
-    <Compile Include="ViewModels\CommandHandler.cs" />
+    <Compile Include="Utils\CommandHandler.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
     <Compile Include="ViewModels\PageBaseViewModel.cs" />
     <Compile Include="ViewModels\SvmPageViewModel.cs" />

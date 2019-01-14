@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Input;
 using Accord.Neuro;
 using DesktopApp.Models;
+using DesktopApp.Utils;
 using HeartChamberIdentification.Services;
 using HeartChamberIdentification.Utils;
 
@@ -64,7 +65,7 @@ namespace DesktopApp.ViewModels
             var testImage = new Bitmap(AnnModel.TestImagePath);
             var testInput = _imageService.GetPixelsFromImage(AnnModel.TestImagePath);
             var testOutput = _annService.Compute(testInput);
-            var resultImage = _imageService.GetImageFromPixels(testOutput, testImage.Width, testImage.Height);
+            var resultImage = _imageService.AddContourToImage(testImage, testOutput);
 
             if(File.Exists(AnnModel.ResultImagePath))
                 File.Delete(AnnModel.ResultImagePath);
